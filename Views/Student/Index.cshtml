@@ -1,0 +1,321 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+}
+
+@model StudentPortal.ViewModels.StudentDetails;
+
+<script src="~/js/reference.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Add Student
+</button>
+<br>
+<br>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Student</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+          
+            
+            
+            
+            <div class="modal-body">
+                <h1 style="text-align:center; background-color:forestgreen">Add Student</h1>
+                <div style="display:inline-flex">
+                </div>
+                <hr />
+
+                <div class="container">
+                    <div class="row mt-3">
+                        <div class="col"> </div>
+                        <div class="col">
+
+                            <form method="post" enctype="multipart/form-data">
+
+                               
+
+                                    <div id="page1">
+
+                                          <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                      @*  <input type="hidden" name="@Model.Student.StudentId" id="studentid" />*@
+
+                                        <div>
+
+                                            <label asp-for="@Model.Student.FirstName">Enter Student First Name:</label>
+                                            <input asp-for="@Model.Student.FirstName" type="text" id="fnstd" required  autocomplete="off"/>
+                                            <span asp-validation-for="@Model.Student.FirstName" class="text-danger"></span>
+                                        </div>
+
+                                        <br>
+
+                                        <div>
+                                            <label asp-for="@Model.Student.LastName">Enter Student Last Name:</label>
+                                        <input asp-for="@Model.Student.LastName" type="text" id="lnstd" required autocomplete="off" />
+                                            <span asp-validation-for="@Model.Student.LastName" class="text-danger"></span>
+                                        </div>
+                                        <br>
+
+                                        <div>
+
+                                            <label asp-for="@Model.Parent.PFirstName">Enter Parent First Name:</label>
+                                        <input asp-for="@Model.Parent.PFirstName" type="text" id="fnprt" required autocomplete="off" />
+                                            <span asp-validation-for="@Model.Parent.PFirstName" class="text-danger"></span>
+                                        </div>
+
+                                        <br>
+
+                                        <div class="form-group">
+                                            <label asp-for="@Model.Parent.PLastName">Enter Parent Last Name:</label>
+                                        <input asp-for="@Model.Parent.PLastName" type="text" id="lnprt" required autocomplete="off" />
+                                            <span asp-validation-for="@Model.Parent.PLastName" class="text-danger"></span>
+                                        </div>
+                                        <br>
+
+                                 
+                                        <div class="form-group">
+                                            <label asp-for="@Model.Student.StudentDOB">Select Date of Birth:</label>
+                                        <input asp-for="@Model.Student.StudentDOB" type="date" id="dbstd" min="2000-01-01" max="2022-01-01" required autocomplete="off" />
+                                            <span asp-validation-for="@Model.Student.StudentDOB" class="text-danger"></span>
+                                        </div>
+                                        <br>
+
+
+                                        <div class="form-group">
+                                            <label asp-for="@Model.Student.RelationWithStudent">Select Relationship with Student:</label><br>
+
+
+                                            <input type="radio" input asp-for="@Model.Student.RelationWithStudent" value="Father" id="rl"  required />Father
+                                        <br><input type="radio" input asp-for="@Model.Student.RelationWithStudent" value="Mother" id="rl" required />Mother
+
+                                            <span asp-validation-for="@Model.Student.RelationWithStudent" class="text-danger"></span>
+                                        </div>
+                                        <br>
+
+                                        <div class="modal-footer"> 
+                                           
+                                          <button type="button" class="btn btn-success" onclick="AddInfo1()">NEXT</button>
+                                        
+                                        </div>
+
+                                      
+
+                                    </div>
+                                
+
+                           
+
+                                
+
+
+                                    <div id="page2" style="display:none">
+
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                   <hr />
+
+                                     <h5 id="nmstd"></h5>
+                                    <hr />
+                                    <h5 id="nmprt"></h5>
+                                    <hr />
+                                    <h5 id="hagestd"></h5>
+                                   <hr />
+
+                                        <h5>Enter Parent Info</h5>
+
+                                        <div class="form-group">
+                                            <label asp-for="@Model.Parent.ParentDOB">Select Date of Birth for Parent:</label>
+                                        <input asp-for="@Model.Parent.ParentDOB" type="date" id="dbprt" min="1955-01-01" required autocomplete="off" />
+                                            <span asp-validation-for="@Model.Parent.ParentDOB" class="text-danger"></span>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label asp-for="@Model.Parent.Occupation">Enter Parent Occupation:</label>
+                                        <input asp-for="@Model.Parent.Occupation" type="text" id="ocprt" required autocomplete="off" />
+                                            <span asp-validation-for="@Model.Parent.Occupation" class="text-danger"></span>
+                                        </div>
+
+
+                                        <div class="modal-footer">
+                                           
+                                            <button type="button" class="btn btn-success" onclick="AddInfo2()">NEXT</button>
+                                        </div>
+
+                                    </div>
+
+                                
+
+
+
+                                <div id="page3" style="display:none">
+
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                    <hr />
+
+                                    <h5 id="nmstd1"></h5>
+                                    <hr />
+                                    <h5 id="nmprt1"></h5>
+                                    <hr />
+                                    <h5 id="hagestd1"></h5>
+                                    <hr />
+                                    <h5 id="ocpprt"></h5>
+                                    <hr />
+                                    <h5 id="hageprt"></h5>
+                                    <hr />
+
+                                    <h5>Student Extra Info </h5>
+
+                                    <div class="form-group">
+                                        <label asp-for="@Model.Student.Standard">Enter Student Standard:</label>
+                                        <input asp-for="@Model.Student.Standard" type="text" id="stdst" required autocomplete="off" />
+                                        <span asp-validation-for="@Model.Student.Standard" class="text-danger"></span>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label asp-for="@Model.Student.PreviousYearPercentage">Enter Previous Year Percentage:</label>
+                                        <input asp-for="@Model.Student.PreviousYearPercentage" type="number" id="stdpyper" required autocomplete="off" />
+                                        <span asp-validation-for="@Model.Parent.Occupation" class="text-danger"></span>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label asp-for="@Model.Student.Gender">Select Student Gender:</label><br>
+
+                                        <input type="radio" input asp-for="@Model.Student.Gender" value="Male" id="gd" required />Male
+                                        <br><input type="radio" input asp-for="@Model.Student.Gender" value="Female" id="gd" required autocomplete="off" />Female
+
+                                        <span asp-validation-for="@Model.Student.Gender" class="text-danger"></span>
+                                    </div>
+
+                                @*    <div class="form-group">
+
+                                        <label name ="sportlist"> Select Sports Played By Student: </label><br>
+                                       
+                                        
+
+                                            <label>
+                                                Cricket
+                                            </label>
+
+                                            <input type="checkbox" id="id" value="1" name="sportlist" />
+                                            <br />
+
+
+                                        <label>
+                                            Table Tennis
+                                        </label>
+                                        <input type="checkbox" id="id" value="2" name="sportslist" />
+                                        <br />
+                                       
+                                        
+                                        <label>
+                                           Swimming
+                                        </label>
+                                        <input type="checkbox" id="id" value="3" name="sportslist" />
+
+                                            <div>&nbsp &nbsp</div>
+                                        
+
+                                    </div>*@
+                                    <br><br>
+
+                                    <div class="form-group">
+                                        <label asp-for="@Model.Student.ProfileImage">Upload Student Image:</label><br>
+                                        <input asp-for="@Model.Student.ProfileImage" type="file" id="fileinput">
+                                    </div>
+
+
+                                    <div class="modal-footer">
+                                        
+                                        <button type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="AddStd()">SAVE Student</button>
+                                    </div>
+
+                                </div>
+                              
+                            </form>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="mt-3">
+    <h1 style="text-align:center; background-color:forestgreen">Available Students</h1>
+    <div style="display:inline-flex">
+    </div>
+
+    <br> <br>
+
+    
+
+    <table class="table table-striped table-dark" style="text-align:center">
+
+        <tbody id="table_data">
+
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <td>DOB</td>
+                <th>Standard</th>
+               @* <th>Operations</th>*@
+            </tr>
+
+
+
+            @foreach (var std in ViewBag.datalist)
+            {
+
+              
+                     DateTime myDate = std.StudentDOB;
+                     string formattedDate = myDate.ToString("dd-MM-yyyy");
+                    
+                <tr>
+
+                    <td>@std.FirstName</td>
+                    <td>@std.LastName</td>
+                    <td>@formattedDate</td>
+                    <td>@std.Standard</td>
+
+                   @* <td>
+                         <button class="btn btn-warning" onclick="EditStd()">EDIT</button> &nbsp &nbsp
+                        <button class="btn btn-danger" onclick="DeleteStd()">DELETE</button>
+                    </td>*@
+
+                </tr>
+
+            }            
+            
+        </tbody>
+
+    </table>
+    
+
+</div>
